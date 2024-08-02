@@ -5,20 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from './Pages/Dashboard';
-import Watchlist from './Pages/Watchlist';
-import Wishlist from './Pages/Wishlist';
 import SignUp from './Authentication/SignUp';
 import Signin from './Authentication/Signin';
 import Crypto from './Pages/Crypto';
 import Home from './Pages/Home';
+import Transactions from './Pages/Transactions';
+import NewsComponent from './Pages/News';
 const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />
   },
   {
-    path: '/Wishlist',
-    element:<Wishlist/>
+    path: '/transactions',
+    element:<Transactions/>
   },
   {
     path: '/Dashboard',
@@ -32,16 +32,16 @@ const appRouter = createBrowserRouter([
     path: '/Crypto',
     element:<Crypto/>
   },
-  {
-    path: '/Watchlist',
-    element:<Watchlist/>
-  },{
+ {
     path: '/Login',
     element:<Signin/>
   },
   {
     path:'/Signup',
     element:<SignUp/>
+  },{
+    path:'/news',
+    element:<NewsComponent/>
   }
  
 ]);

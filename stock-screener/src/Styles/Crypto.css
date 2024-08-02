@@ -2,7 +2,8 @@
 
 
 .Main{
-  background-image: url('../Resources/Dash-back.jpg');
+  /* background-image: url('../Resources/Dash-back.jpg'); */
+  background-color: #0A0A0C;
   background-size: cover;
   background-position:center;
   width: 1520px;
@@ -119,7 +120,7 @@ h2 {
 .Stocks-list{
   background: linear-gradient(to right, #232526, #414345);  padding: 10px;
   height: 600px;
-  width: 300px;
+  width: 450px;
 }
 
 .Para{

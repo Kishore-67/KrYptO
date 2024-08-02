@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import './Signin.css'
-
+import ima from '../Resources/Revenue-bro.png'
 import { FaRegUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -21,8 +21,13 @@ const Signin = () => {
       }
       try {
             const res = await axios.post('http://localhost:5000/signin', {email,password});
-            navigate('/Home')
-            console.log(res.data);
+            if (res.data === "Success") {
+              console.log("Login Success");
+              alert('Login successful!');
+              navigate('/Home');
+          } else {
+              alert('Incorrect password! Please try again.');
+          }
       } 
       catch (error) {
         console.error('Error signing in:', error);
@@ -76,8 +81,9 @@ const Signin = () => {
     //   </form>
     // </div>
 
-<div className='parent'>
-  
+<div className='parent1'>
+<img src={ima} className='ima' alt='crypto'height={550} width={550} />
+
     
     <div className='wrapper'>
     <form onSubmit={handleSubmit}>
@@ -86,7 +92,6 @@ const Signin = () => {
             <input type="text"  placeholder="email"  value={email} onChange={(e)=>setEmail(e.target.value)} />
             <FaRegUser className='icon' />
         </div>
-
         <div className="input-box">
         <input type="text"  placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
         <RiLockPasswordFill className='icon' />

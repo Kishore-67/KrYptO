@@ -41,11 +41,11 @@ nav ul li a:not(.active):hover{
   nav {
     display: flex;
     justify-content: space-between;
+    max-width: 1500px;
     align-items: center;
-    background-color: #607274;
+    background-color: #FFAF45;
     backdrop-filter: blur 30px;
     height: 5.5rem;
-   
     position:relative;
     top: 0;
   }

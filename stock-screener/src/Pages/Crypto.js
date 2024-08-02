@@ -100,9 +100,21 @@ function Crypto() {
 
       if (orderType === 'sell' && position) {
         const profitOrLoss = (position.price - currentPrice).toFixed(2);
-        setOrders([...orders, `Close Sell: Buy at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp}`]);
-        setPosition(null);
-        setOrderType(null);
+        const closedOrder = {
+          type: 'buy',
+          price: currentPrice,
+          profitOrLoss,
+          timestamp
+        };
+        try {
+          await axios.post('http://localhost:5000/closedpositions', closedOrder);
+          setOrders([...orders, `Close Sell: Buy at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp}`]);
+          setPosition(null);
+          setOrderType(null);
+        } catch (error) {
+          console.error('Error in logging closed position:', error);
+          alert('Failed to log closed position');
+        }
       } else {
         try {
           await axios.post('http://localhost:5000/buyorder', { currentPrice });
@@ -128,9 +140,21 @@ function Crypto() {
 
       if (orderType === 'buy' && position) {
         const profitOrLoss = (currentPrice - position.price).toFixed(2);
-        setOrders([...orders, `Close Buy: Sell at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp}`]);
-        setPosition(null);
-        setOrderType(null);
+        const closedOrder = {
+          type: 'sell',
+          price: currentPrice,
+          profitOrLoss,
+          timestamp
+        };
+        try {
+          await axios.post('http://localhost:5000/closedpositions', closedOrder);
+          setOrders([...orders, `Close Position at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp} `]);
+          setPosition(null);
+          setOrderType(null);
+        } catch (error) {
+          console.error('Error in logging closed position:', error);
+          alert('Failed to log closed position');
+        }
       } else {
         try {
           await axios.post('http://localhost:5000/sellorder', { currentPrice });
@@ -158,9 +182,8 @@ function Crypto() {
 
   return (
     <>
-      
       <div className='Main'>
-      <Navbar />
+        <Navbar />
         <div style={{ marginLeft: '40px' }}>
           <text style={{ color: 'white', fontFamily: 'fantasy', fontSize: 50 }}>Crypto</text>
         </div>
@@ -208,29 +231,27 @@ function Crypto() {
             </div>
           </div>
         </div>
-        <div  style={{ position: 'absolute', display: 'flex', top: '20%', right: '10%' }}>
-            <div className ='Stocks-list' style={{ position: 'absolute', display: 'flex',  top: '5%', right: '30%',borderRadius:'20px' }}>
-
-            <text style={{ color: 'white', fontFamily: 'Fugaz One, sans-serif', fontSize: 25 ,fontWeight:200}}>UPCOMING STOCKS LIST</text>
-              <div style={{position:'absolute',display:'flex',flexDirection:'column',justifyContent:'space-around',  top: '20%', right: '45%'}}>
+        <div style={{ position: 'absolute', display: 'flex', top: '20%', right: '10%' }}>
+          <div className='Stocks-list' style={{ position: 'absolute', display: 'flex', top: '5%', right: '30%', borderRadius: '20px' }}>
+            <text style={{ color: 'white', fontFamily: 'Fugaz One, sans-serif', fontSize: 25, fontWeight: 200 }}>UPCOMING STOCKS LIST</text>
+            <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', top: '20%', right: '55%' }}>
               {coinsList.map((coin, index) => (
-                <div key={index} style={{ fontFamily: 'Signika Negative, sans-serif', fontSize: 30, fontWeight: 100 ,color:'white'}}>{coin.name}</div>
+                <div key={index} style={{ fontFamily: 'Signika Negative, sans-serif', fontSize: 30, fontWeight: 100, color: 'white' }}>{coin.name}</div>
               ))}
-              </div>
-              <div style={{position:'absolute',display:'flex',flexDirection:'column',justifyContent:'space-around',  top: '20%', right: '8%',}}>
+            </div>
+            <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', top: '20%', right: '8%' }}>
               {coinsList.map((coin, index) => (
-                <div key={index} style={{ fontFamily: 'Signika Negative, sans-serif', fontSize: 30, fontWeight: 100 ,color:'white'}}>${parseInt(coin.price)}</div>
-                 
+                <div key={index} style={{ fontFamily: 'Signika Negative, sans-serif', fontSize: 30, fontWeight: 100, color: 'white' }}>${parseInt(coin.price)}</div>
               ))}
-              </div>
-           </div>
+            </div>
+          </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <div className='Order-Container'>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 30, fontWeight: 200, color: 'white' }}>Orders Placed:</div>
               {orders.map((order, index) => (
-                <p key={index} style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 20, fontWeight: 100, color: 'black' }}>{order}</p>
+                <p key={index} style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 20, fontWeight: 400, color: 'white' }}>{order}</p>
               ))}
             </div>
           </div>
@@ -238,7 +259,7 @@ function Crypto() {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 30, fontWeight: 200, color: 'white' }}>Position:</div>
               {position && (
-                <p style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 20, fontWeight: 100, color: currentProfitOrLoss >= 0 ? 'green' : 'red' }}>
+                <p style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: 24, fontWeight: 600, color: currentProfitOrLoss >= 0 ? 'green' : 'red' }}>
                   {`Position: ${position.type === 'buy' ? 'Bought' : 'Sold'} at ${position.price.toFixed(2)}. ${position.type === 'buy' ? 'Current Profit/Loss' : 'Expected Profit/Loss'}: ${currentProfitOrLoss}`}
                 </p>
               )}
@@ -248,16 +269,13 @@ function Crypto() {
             </div>
           </div>
         </div>
-        <div style={{color:'white',marginTop:'1%',marginLeft:'30px'}}>
-        <div style={{fontFamily:'Signika Negative, sans-serif',fontSize:30}}>Market Timings:</div>
-              
-                    <div className='Para'> Crypto markets are always open (24/7).</div>
-                    <div className='Para'>It has been suggested that the best time to trade cryptocurrencies is from 8am to 4pm. </div>
-                    <div className='Para'>This is the time when the most volatility occurs, particularly in American markets, so there is the most potential to make money at this point.</div> 
-              
+        <div style={{ color: 'white', marginTop: '1%', marginLeft: '30px' }}>
+          <div style={{ fontFamily: 'Signika Negative, sans-serif', fontSize: 30 }}>Market Timings:</div>
+          <div className='Para'> Crypto markets are always open (24/7).</div>
+          <div className='Para'>It has been suggested that the best time to trade cryptocurrencies is from 8am to 4pm. </div>
+          <div className='Para'>This is the time when the most volatility occurs, particularly in American markets, so there is the most potential to make money at this point.</div>
         </div>
       </div>
-      
     </>
   );
 }

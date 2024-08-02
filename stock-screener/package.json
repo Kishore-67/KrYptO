@@ -17,6 +17,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
+    "react-type-animation": "^3.2.0",
     "smartapi-javascript": "^1.0.23",
     "web-vitals": "^2.1.4"
   },

@@ -1,4 +1,43 @@
-.Whole{
-    background-color: rgb(255, 255, 255);
+.transactions-container {
+  padding: 20px;
 }
 
+.orders {
+  margin: 20px 0;
+}
+
+.closed-positions {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #f1f1f1;
+  text-transform: capitalize;
+  font-variant: small-caps;
+
+}
+
+.closed-positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ddd;
+  margin-top: 20px;
+}
+
+.closed-positions-table th,
+.closed-positions-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.closed-positions-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.closed-positions-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.closed-positions-table tr:hover {
+  background-color: #f1f1f1;
+}

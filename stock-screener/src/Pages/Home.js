@@ -2,13 +2,37 @@ import React from 'react'
 import '../Styles/Home.css'
 import Navbar from '../Navbar'
 import crypto from '../Resources/crypto.jpg'
+import lap from '../Resources/laptop.png'
 import { Link } from 'react-router-dom'
+import { TypeAnimation } from 'react-type-animation';
 
 function Home() {
   return (
     <div className='Main1'>
       <Navbar/>
-       
+
+            <div className='ho1'>
+            <TypeAnimation
+               sequence={[
+                'KRYPTO',
+                  1000,
+                  ':)',1000
+                    ]}
+                  wrapper="span"
+                 speed={10}
+                 style={{ fontSize: '24ePX' }}
+
+                  repeat={Infinity}
+              />                  </div>
+            <div className='ho2'>
+                  Key to Test Your Crypto Knowledge !
+            </div>
+            <div className='quote'>The market is a device for transferring money from the impatient to the patient.</div>
+            <div className='Auth'> -Warren Buffett</div>
+            <div className='i1'>
+                      <img src={lap} className='crypto' alt='crypto'height={450} width={600} />
+                  </div>
+
             <div className='Ca-con'>
         
                  <h1>Welcome to krYpto ultimate Crypto Companion !</h1>   
@@ -34,7 +58,7 @@ function Home() {
                   </div>
 
                   <div style={{marginTop:'60px'}}>
-                      <img src={crypto} className='crypto' alt='crypto'height={350} width={600} />
+                      {/* <img src={crypto} className='crypto' alt='crypto'height={400} width={600} /> */}
                       <Link to={'/Crypto'} ><div className='but1'>Trade now</div></Link>
                   </div>
             </div>

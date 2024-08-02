@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './Signup.css'
 import { CiMail } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
+import ima from '../Resources/Revenue-bro.png'
+
 import { RiLockPasswordFill } from "react-icons/ri";
+import {useNavigate} from 'react-router-dom'
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -15,7 +18,7 @@ const SignUp = () => {
   const [username,setUsername] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!username || !email  || !password )
@@ -23,10 +26,12 @@ const SignUp = () => {
       alert('Please enter the below all fields');
       return;
     }
+    
     else{
       try {
         await axios.post('http://localhost:5000/signup', {username,email,password});
         alert('User signed up successfully');
+       navigate('/Home');
       } catch (error) {
         console.error('Error signing up:', error);
         alert('Failed to sign up');
@@ -83,7 +88,9 @@ const SignUp = () => {
     //   </form>
     // </div>
 
-    <div className='parent'>
+    <div className='parent2'>
+      <img src={ima} className='ima' alt='crypto'height={550} width={550} />
+
     <div className='Signup'>
     <form onSubmit={handleSubmit}>
             <h1>Register</h1>

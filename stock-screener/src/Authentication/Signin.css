@@ -1,13 +1,14 @@
-.parent{
+.parent1{
     
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../Resources/3398219.jpg') no-repeat;
-    /* background-color: #ff0a0a; */
+
+    background-color: #0A0A0C;
+    /* background: url() no-repeat; */
     
-   
+    /* background-color: #ff0a0a; */ 
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -18,6 +19,11 @@
 .but-container{
     justify-content: center;
     
+}
+.ima{
+    position:absolute;
+        left:5%;
+        top:20%;
 }
 .but-container  button{
     background: #fff;
@@ -33,15 +39,15 @@
 
 }
 .wrapper{ 
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 10%;
+    top: 20%;
+    background-color: #0A0A0C;
     width:420px;
     /* border: 2px solid rgb(255, 255, 255); */
     background: transparent;
-    box-shadow: 0 4px 8px 0 rgb(255, 0, 0), 0 6px 20px 0 rgb(255, 0, 0);
-
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 40px rgba(0,0,0,.2);
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(0, 0, 0);
+    backdrop-filter: blur(10px);
     color:  rgb(255, 255, 255);
     border-radius: 20px;
     padding: 30px 40px;
