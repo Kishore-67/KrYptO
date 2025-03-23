@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://Krypto_server:<db_password>@krypto0.tw8p8.mongodb.net/?retryWrites=true&w=majority&appName=Krypto0');
+mongoose.connect('mongodb+srv://Krypto_server:Krypto_server@krypto0.tw8p8.mongodb.net/?retryWrites=true&w=majority&appName=Krypto0');
 
 app.post('/signup', (req, res) => {
   const { username,email, password } = req.body;
