@@ -29,7 +29,7 @@ const SignUp = () => {
     
     else{
       try {
-        await axios.post('http://localhost:5000/signup', {username,email,password});
+        await axios.post('https://krypto-uo36.onrender.com/signup', {username,email,password});
         alert('User signed up successfully');
        navigate('/Home');
       } catch (error) {
