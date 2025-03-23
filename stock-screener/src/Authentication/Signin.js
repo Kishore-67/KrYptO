@@ -20,7 +20,7 @@ const Signin = () => {
         return;
       }
       try {
-            const res = await axios.post('http://localhost:5000/signin', {email,password});
+            const res = await axios.post('https://krypto-uo36.onrender.com/signin', {email,password});
             if (res.data === "Success") {
               console.log("Login Success");
               alert('Login successful!');
