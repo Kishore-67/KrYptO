@@ -107,7 +107,7 @@ function Crypto() {
           timestamp
         };
         try {
-          await axios.post('http://localhost:5000/closedpositions', closedOrder);
+          await axios.post('https://krypto-uo36.onrender.com/closedpositions', closedOrder);
           setOrders([...orders, `Close Sell: Buy at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp}`]);
           setPosition(null);
           setOrderType(null);
@@ -117,7 +117,7 @@ function Crypto() {
         }
       } else {
         try {
-          await axios.post('http://localhost:5000/buyorder', { currentPrice });
+          await axios.post('https://krypto-uo36.onrender.com/buyorder', { currentPrice });
           setOrders([...orders, `Buy at ${currentPrice.toFixed(2)} at ${timestamp}`]);
           setPosition({ type: 'buy', price: currentPrice, timestamp });
           setOrderType('buy');
@@ -147,7 +147,7 @@ function Crypto() {
           timestamp
         };
         try {
-          await axios.post('http://localhost:5000/closedpositions', closedOrder);
+          await axios.post('https://krypto-uo36.onrender.com/closedpositions', closedOrder);
           setOrders([...orders, `Close Position at ${currentPrice.toFixed(2)} for P/L: ${profitOrLoss} at ${timestamp} `]);
           setPosition(null);
           setOrderType(null);
@@ -157,7 +157,7 @@ function Crypto() {
         }
       } else {
         try {
-          await axios.post('http://localhost:5000/sellorder', { currentPrice });
+          await axios.post('https://krypto-uo36.onrender.com/sellorder', { currentPrice });
           setOrders([...orders, `Sell at ${currentPrice.toFixed(2)} at ${timestamp}`]);
           setPosition({ type: 'sell', price: currentPrice, timestamp });
           setOrderType('sell');
