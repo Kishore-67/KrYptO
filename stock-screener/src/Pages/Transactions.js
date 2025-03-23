@@ -10,7 +10,7 @@ function Transactions() {
     // Function to fetch closed positions
     const fetchClosedPositions = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/closedpositions'); // Update with your actual endpoint
+        const response = await axios.get('https://krypto-uo36.onrender.com/closedpositions'); // Update with your actual endpoint
         setClosedPositions(response.data);
       } catch (error) {
         console.error('Error fetching closed positions:', error);
